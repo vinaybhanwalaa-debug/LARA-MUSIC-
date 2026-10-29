@@ -2,267 +2,133 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#101014">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#09090f">
 <title>LARA MUSIC</title>
-
 <style>
+:root{--bg:#09090f;--panel:#14141e;--muted:#9999ad;--text:#fff;--accent:#a855f7;--pink:#ec4899}
 *{box-sizing:border-box}
-body{
-  margin:0;background:#101014;color:#fff;
-  font-family:Arial,sans-serif;padding-bottom:115px
-}
-header{
-  padding:22px 20px;display:flex;
-  align-items:center;justify-content:space-between
-}
-.logo{font-size:25px;font-weight:900;letter-spacing:2px}
-.logo span{color:#b66aff}
-.tag{color:#aaa;font-size:12px;margin-top:5px}
-main{padding:0 20px;max-width:800px;margin:auto}
-h2{font-size:21px;margin-top:28px}
-.search{
-  width:100%;padding:15px;border-radius:14px;
-  border:1px solid #333;background:#202027;
-  color:white;font-size:16px;outline:none
-}
-.banner{
-  margin-top:20px;padding:25px;border-radius:20px;
-  background:linear-gradient(135deg,#5725a5,#bb48a5);
-}
-.banner h2{font-size:27px;margin:0 0 8px}
-.banner p{color:#f0ddff;font-size:14px}
-button{cursor:pointer}
-.banner button,.action{
-  border:0;border-radius:20px;padding:11px 18px;
-  background:white;color:#18121d;font-weight:bold
-}
-.song{
-  display:flex;align-items:center;gap:13px;
-  padding:12px 0;border-bottom:1px solid #29292f
-}
-.cover{
-  width:57px;height:57px;border-radius:12px;
-  display:grid;place-items:center;font-size:25px;
-  flex-shrink:0;background:linear-gradient(135deg,#4f46e5,#db2777)
-}
-.info{flex:1;min-width:0}
-.info strong{display:block;font-size:15px}
-.info small{display:block;color:#aaa;margin-top:6px}
-.play,.heart{
-  background:#292932;color:white;border:0;
-  border-radius:50%;width:40px;height:40px;font-size:17px
-}
-.heart{color:#ff7cae}
-.tabs{display:flex;gap:9px;margin-top:18px}
-.tab{
-  border:1px solid #383841;border-radius:22px;
-  background:#202027;color:white;padding:9px 14px
-}
-.tab.active{background:#b66aff;color:#160d20;border-color:#b66aff}
-.empty{color:#aaa;padding:20px 0}
-footer{
-  position:fixed;bottom:0;left:0;right:0;
-  background:#1d1d24;border-top:1px solid #393942;
-  padding:14px 20px calc(14px + env(safe-area-inset-bottom));
-}
-.player{max-width:800px;margin:auto}
-.now{display:flex;align-items:center;gap:12px}
-.now .info{flex:1}
-.controls{display:flex;align-items:center;gap:14px}
-.controls button{
-  border:0;background:transparent;color:white;font-size:22px
-}
-audio{width:100%;height:35px;margin-top:9px}
-.notice{color:#aaa;font-size:12px;margin-top:12px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif;padding-bottom:110px}
+header{padding:22px 5%;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.logo{font-size:27px;font-weight:900;letter-spacing:1px}.logo span{color:var(--accent)}
+.search{background:#1b1b28;border:1px solid #303044;border-radius:25px;padding:12px 18px;color:white;width:min(100%,320px);outline:none}
+main{max-width:1150px;margin:auto;padding:10px 5%}
+.hero{padding:35px 28px;border-radius:24px;background:linear-gradient(120deg,#37105f,#831843,#19112c);margin-bottom:28px}
+.hero small{letter-spacing:3px;color:#f0abfc}.hero h1{font-size:clamp(32px,7vw,55px);margin:14px 0}.hero p{color:#f0d9f6;line-height:1.6}
+button{cursor:pointer;border:0;border-radius:20px;padding:11px 17px;font-weight:bold}
+.primary{background:white;color:#251035}.section-head{display:flex;justify-content:space-between;align-items:center;margin-top:30px}
+.section-head h2{font-size:22px}
+.tabs{display:flex;gap:9px;flex-wrap:wrap;margin:18px 0}
+.tab{background:var(--panel);color:white;border:1px solid #303044}.tab.active{background:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:16px}
+.card{background:var(--panel);padding:12px;border-radius:17px;min-width:0}
+.cover{width:100%;aspect-ratio:1;display:grid;place-items:center;border-radius:12px;font-size:43px;background:linear-gradient(135deg,#39136b,#db2777)}
+.card h3{font-size:14px;margin:12px 0 5px;overflow-wrap:anywhere}.card p{font-size:12px;color:var(--muted);margin:0 0 12px}
+.actions{display:flex;gap:7px}.actions button{padding:9px 11px;background:#29293a;color:white}.actions .play{background:var(--accent)}
+.note{color:var(--muted);font-size:13px;line-height:1.6;margin-top:20px}
+#player{position:fixed;bottom:0;left:0;width:100%;background:#171722;border-top:1px solid #333344;padding:13px 5%;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;z-index:5}
+#nowTitle{font-weight:bold}#nowArtist{font-size:12px;color:var(--muted);margin-top:5px}
+audio{width:100%;max-width:420px;height:36px}
+footer{text-align:center;color:var(--muted);font-size:12px;margin:35px 0}
+.empty{color:var(--muted);padding:20px 0}
+@media(max-width:520px){header{padding:18px 5%}.search{width:100%}.hero{padding:25px 20px}#player{grid-template-columns:1fr}audio{max-width:none}}
 </style>
 </head>
-
 <body>
 <header>
-  <div>
-    <div class="logo">LARA<span>MUSIC</span></div>
-    <div class="tag">YOUR MUSIC. YOUR WORLD.</div>
-  </div>
-  <div style="font-size:25px">🎧</div>
+  <div class="logo">♫ LARA <span>MUSIC</span></div>
+  <input class="search" id="search" placeholder="🔎 Search songs or artists..." aria-label="Search songs or artists">
 </header>
 
 <main>
-  <div class="banner">
-    <h2>Feel every beat.</h2>
-    <p>Your next favorite song is waiting for you.</p>
-    <button onclick="document.getElementById('search').focus()">
-      Discover music →
-    </button>
-  </div>
+<section class="hero">
+  <small>YOUR MUSIC. YOUR WORLD.</small>
+  <h1>Every era.<br>Every mood. 🎧</h1>
+  <p>Discover music, enjoy timeless classics, and build your own library.</p>
+  <button class="primary" onclick="document.getElementById('library').scrollIntoView({behavior:'smooth'})">Explore music ↓</button>
+</section>
 
-  <h2>Find your sound</h2>
-  <input id="search" class="search"
-    placeholder="Search songs or artists..."
-    oninput="render()">
+<div class="section-head"><h2>Discover</h2></div>
+<div class="tabs">
+  <button class="tab active" data-filter="all">All music</button>
+  <button class="tab" data-filter="new">New music</button>
+  <button class="tab" data-filter="classic">Classics</button>
+  <button class="tab" data-filter="favorites">❤️ Favorites</button>
+  <button class="tab" data-filter="playlist">My playlist</button>
+</div>
 
-  <div class="tabs">
-    <button class="tab active" onclick="setTab('all',this)">All songs</button>
-    <button class="tab" onclick="setTab('favorites',this)">♥ Favorites</button>
-  </div>
+<section id="library">
+  <div class="section-head"><h2 id="sectionTitle">Made for you</h2></div>
+  <div class="grid" id="tracks"></div>
+  <p class="empty" id="empty" hidden>No tracks found. Try another search or add a favorite.</p>
+</section>
 
-  <h2 id="sectionTitle">Made for you</h2>
-  <div id="songs"></div>
-
-  <h2>Your playlists</h2>
-  <button class="action" onclick="createPlaylist()">＋ Create playlist</button>
-  <div id="playlists" class="notice">No playlists yet.</div>
-  <p class="notice">
-    LARA MUSIC · Early preview
-  </p>
+<p class="note">LARA MUSIC is a free music-player prototype. The sample tracks below are demonstration audio, not a complete catalog of Bollywood or commercial releases. More music can be added when a legal, free audio source is available.</p>
+<footer>Made with ❤️ using GitHub · LARA MUSIC</footer>
 </main>
 
-<footer>
-  <div class="player">
-    <div class="now">
-      <div class="cover" id="nowCover">🎵</div>
-      <div class="info">
-        <strong id="nowTitle">Choose a song</strong>
-        <small id="nowArtist">LARA MUSIC</small>
-      </div>
-      <div class="controls">
-        <button onclick="changeSong(-1)" aria-label="Previous song">⏮</button>
-        <button onclick="togglePlay()" id="mainPlay" aria-label="Play or pause">▶</button>
-        <button onclick="changeSong(1)" aria-label="Next song">⏭</button>
-      </div>
-    </div>
-    <audio id="audio" controls preload="none"></audio>
-  </div>
-</footer>
+<div id="player">
+  <div><div id="nowTitle">Choose a track</div><div id="nowArtist">LARA MUSIC PLAYER</div></div>
+  <audio id="audio" controls preload="none"></audio>
+</div>
 
 <script>
-const tracks = [
-  {
-    title:"Sample Melody",
-    artist:"LARA Sessions",
-    icon:"🎹",
-    url:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-  },
-  {
-    title:"Dreaming in Color",
-    artist:"Demo Artist",
-    icon:"🌌",
-    url:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
-  },
-  {
-    title:"Night Drive",
-    artist:"Demo Artist",
-    icon:"🌃",
-    url:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
-  }
+const sampleTracks=[
+{id:1,title:"SoundHelix Song 1",artist:"SoundHelix",era:"new",emoji:"🌌",url:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"},
+{id:2,title:"SoundHelix Song 2",artist:"SoundHelix",era:"classic",emoji:"🌅",url:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"},
+{id:3,title:"SoundHelix Song 3",artist:"SoundHelix",era:"new",emoji:"🌃",url:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"},
+{id:4,title:"SoundHelix Song 4",artist:"SoundHelix",era:"classic",emoji:"🌙",url:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"},
+{id:5,title:"SoundHelix Song 5",artist:"SoundHelix",era:"new",emoji:"💜",url:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3"},
+{id:6,title:"SoundHelix Song 6",artist:"SoundHelix",era:"classic",emoji:"✨",url:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3"}
 ];
-
-let favorites = JSON.parse(localStorage.getItem("lara-favorites") || "[]");
-let playlists = JSON.parse(localStorage.getItem("lara-playlists") || "[]");
-let current = -1;
-let tab = "all";
-
-const audio = document.getElementById("audio");
+let favorites=JSON.parse(localStorage.getItem("lara-favorites")||"[]");
+let playlist=JSON.parse(localStorage.getItem("lara-playlist")||"[]");
+let filter="all",currentTrack=null;
+const $=id=>document.getElementById(id);
 
 function render(){
-  const q = document.getElementById("search").value.toLowerCase();
-  const list = tracks.map((t,i)=>({...t,i})).filter(t =>
-    (tab==="all" || favorites.includes(t.i)) &&
-    (t.title+" "+t.artist).toLowerCase().includes(q)
-  );
-
-  document.getElementById("sectionTitle").textContent =
-    tab==="favorites" ? "Your favorites" : "Made for you";
-
-  document.getElementById("songs").innerHTML = list.length
-    ? list.map(t=>`
-      <div class="song">
-        <div class="cover">${t.icon}</div>
-        <div class="info">
-          <strong>${t.title}</strong>
-          <small>${t.artist}</small>
-        </div>
-        <button class="heart" onclick="favorite(${t.i})"
-          aria-label="Toggle favorite">${favorites.includes(t.i)?"♥":"♡"}</button>
-        <button class="play" onclick="playSong(${t.i})"
-          aria-label="Play ${t.title}">▶</button>
-      </div>`).join("")
-    : '<div class="empty">No songs found.</div>';
+ const query=$("search").value.trim().toLowerCase();
+ const shown=sampleTracks.filter(t=>{
+  const matches=(t.title+" "+t.artist).toLowerCase().includes(query);
+  const category=filter==="all"||(filter==="new"&&t.era==="new")||(filter==="classic"&&t.era==="classic")||(filter==="favorites"&&favorites.includes(t.id))||(filter==="playlist"&&playlist.includes(t.id));
+  return matches&&category;
+ });
+ $("tracks").innerHTML=shown.map(t=>`
+ <article class="card">
+  <div class="cover">${t.emoji}</div>
+  <h3>${t.title}</h3><p>${t.artist} · ${t.era==="new"?"New music":"Classics"}</p>
+  <div class="actions">
+   <button class="play" onclick="playTrack(${t.id})">▶ Play</button>
+   <button onclick="toggleFavorite(${t.id})" aria-label="Toggle favorite">${favorites.includes(t.id)?"❤️":"♡"}</button>
+   <button onclick="togglePlaylist(${t.id})" aria-label="Add to playlist">${playlist.includes(t.id)?"✓":"＋"}</button>
+  </div>
+ </article>`).join("");
+ $("empty").hidden=shown.length>0;
+ const titles={all:"Made for you",new:"New music",classic:"Timeless classics",favorites:"Your favorites",playlist:"Your playlist"};
+ $("sectionTitle").textContent=titles[filter];
 }
-
-function setTab(value,button){
-  tab=value;
-  document.querySelectorAll(".tab").forEach(b=>b.classList.remove("active"));
-  button.classList.add("active");
-  render();
+function playTrack(id){
+ currentTrack=sampleTracks.find(t=>t.id===id);
+ $("nowTitle").textContent=currentTrack.title;
+ $("nowArtist").textContent=currentTrack.artist;
+ $("audio").src=currentTrack.url;
+ $("audio").play().catch(()=>{});
 }
-
-function favorite(i){
-  favorites = favorites.includes(i)
-    ? favorites.filter(n=>n!==i) : [...favorites,i];
-  localStorage.setItem("lara-favorites",JSON.stringify(favorites));
-  render();
+function toggleFavorite(id){
+ favorites=favorites.includes(id)?favorites.filter(x=>x!==id):[...favorites,id];
+ localStorage.setItem("lara-favorites",JSON.stringify(favorites));render();
 }
-
-function playSong(i){
-  current=i;
-  const t=tracks[i];
-  document.getElementById("nowTitle").textContent=t.title;
-  document.getElementById("nowArtist").textContent=t.artist;
-  document.getElementById("nowCover").textContent=t.icon;
-  audio.src=t.url;
-  audio.play().then(updatePlay).catch(()=>{
-    document.getElementById("mainPlay").textContent="▶";
-  });
+function togglePlaylist(id){
+ playlist=playlist.includes(id)?playlist.filter(x=>x!==id):[...playlist,id];
+ localStorage.setItem("lara-playlist",JSON.stringify(playlist));render();
 }
-
-function togglePlay(){
-  if(current===-1){playSong(0);return}
-  if(audio.paused){
-    audio.play().catch(()=>{});
-  }else{
-    audio.pause();
-  }
-  updatePlay();
-}
-
-function updatePlay(){
-  document.getElementById("mainPlay").textContent =
-    audio.paused ? "▶" : "⏸";
-}
-
-function changeSong(direction){
-  current=(current+direction+tracks.length)%tracks.length;
-  playSong(current);
-}
-
-audio.addEventListener("play",updatePlay);
-audio.addEventListener("pause",updatePlay);
-audio.addEventListener("ended",()=>changeSong(1));
-
-function createPlaylist(){
-  const name=prompt("What should your playlist be called?");
-  if(!name || !name.trim())return;
-  playlists.push(name.trim());
-  localStorage.setItem("lara-playlists",JSON.stringify(playlists));
-  renderPlaylists();
-}
-
-function renderPlaylists(){
-  document.getElementById("playlists").innerHTML=playlists.length
-    ? playlists.map(p=>`<div class="song">🎵 &nbsp; ${escapeHTML(p)}</div>`).join("")
-    : "No playlists yet.";
-}
-
-function escapeHTML(s){
-  return s.replace(/[&<>"']/g,c=>({
-    "&":"&amp;","<":"&lt;",">":"&gt;",
-    '"':"&quot;","'":"&#39;"
-  })[c]);
-}
-
+$("search").addEventListener("input",render);
+document.querySelectorAll(".tab").forEach(btn=>btn.addEventListener("click",()=>{
+ filter=btn.dataset.filter;
+ document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b===btn));
+ render();
+}));
 render();
-renderPlaylists();
 </script>
 </body>
 </html>
